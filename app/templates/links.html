@@ -1,6 +1,55 @@
 {% extends "base.html" %}
-{% block title %}{{user}}{% endblock %}
+{% block title %}{{linksettings.owner}}{% endblock %}
 {% block content %}
-<h1>{{user}}</h1>
-<p>has no links set up yet. <a href="http://google.com">Let them know!</a></p>
+	{% if links %}
+		<style>
+			#sidebar {
+				display: none;
+			}
+			#main {
+				width: 100%;
+				left: 0;
+			}
+			[role="button"] {
+				width: {{linksettings.buttonwidth}}%;
+				margin-bottom: 20px;
+				color: {{linksettings.buttontextcolor}};
+				border-radius: {{linksettings.buttonradius}}px;
+				background-color: {{linksettings.buttonbackgroundcolor}};
+			}
+			[role="button"]:hover {
+				background-color: {{linksettings.buttonbackgroundhovercolor}};
+			}
+			#main {
+				background: linear-gradient('{{linksettings.bgradius}}deg, {{linksettings.backgroundcolor1}} 0%, {{linksettings.backgroundcolor2}} 100%');
+				background: #1e5799; /* Old browsers */
+				background: -moz-linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%, {{linksettings.backgroundcolor2}} 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{linksettings.backgroundcolor1}}', endColorstr='{{linksettings.backgroundcolor2}}',GradientType=0 ); /* IE6-9 */
+				min-height: 100%;
+			}
+
+			#colorschemecontainer {
+				display: none;
+			}
+			#projects {
+				display: none;
+			}
+
+			h1 {
+				margin-bottom: 20px;
+			}
+		</style>
+		<section id="links">
+			<h1>{{linksettings.owner}}</h1>
+			{% for link in links %}
+				<div class="buttons">
+					<a role="button" href="{{link.link}}"><i class="fa-brands fa-{{link.icon}}"></i> {{link.label}}</a>
+				</div>
+		{% endfor %}
+		</section>
+	{% else %}
+		<h1>User has no links, sorry!</h1>
+	{% endif %}
 {% endblock %}

@@ -7,6 +7,9 @@ from app.errors import page_not_found
 def index():
     return render_template('index.html')
 
-@app.route('/u/<username>')
-def links(username):
-    return render_template('links.html', user=username)
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    if request.form:
+        return request.form
+    else:
+        return render_template('test.html')

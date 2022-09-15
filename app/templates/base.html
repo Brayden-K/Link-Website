@@ -71,17 +71,21 @@
 					{% endif %}
 				</nav>
 				<footer>
-					<article>
-						{% if user.admin == 'True' %}
-							<button class="outline" style="color: white; margin-bottom:0px;" onclick="window.location.href='{{url_for('admin')}}'">Admin Panel</button>
-							<hr>
-						{% endif %}
-						<div class="profilepicture">
-							<img src="{{user.profile_image_url}}">
-							<p>{{user.username}}<br></p>
-							<i class="fa-regular fa-gear" onclick="window.location.href={{url_for('index')}}'"></i>
-						</div>
-					</article>
+					{% if user %}
+						<article>
+							{% if user.admin == 'True' %}
+								<button class="outline" style="color: white; margin-bottom:0px;" onclick="window.location.href='{{url_for('admin')}}'">Admin Panel</button>
+								<hr>
+							{% endif %}
+							
+							<div class="profilepicture">
+								<img src="{{user.profile_image_url}}">
+								<p>{{user.username}}<br></p>
+								<i class="fa-regular fa-gear" onclick="window.location.href='{{url_for('account')}}'"></i>
+							</div>
+							
+						</article>
+					{% endif %}
 				</footer>
 			</aside>
 		</div>

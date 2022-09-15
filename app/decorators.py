@@ -11,6 +11,6 @@ def login_required(f):
 	def wrap(*args, **kwargs):
 		# if user is not logged in, redirect to login page      
 		if not session:
-			return redirect('http://google.com')
+			return redirect(url_for('login'))
 		return f(*args, **kwargs)
 	return wrap
