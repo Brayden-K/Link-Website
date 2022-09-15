@@ -1,0 +1,17 @@
+Homepage						In Progress
+
+Ability to Link Discord			Todo
+Ability to verify email			Todo
+Overall Design					Todo
+Dark Theme						Todo
+Light Theme						Todo
+Generate email lists			Todo
+Design Logo						Todo
+Custom Link Pages				Todo
+Highlight a streamer daily		Todo
+Stream Schedule					Todo
+
+Login / Register				Done
+Login with Twitch				Done
+Register						Done
+Project File Structure			Done
