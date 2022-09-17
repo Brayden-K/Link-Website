@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Edit Links{% endblock %}
+{% block content %}
+	<section id="account">
+		<style>
+			[role="button"] {
+				width: {{linksettings.buttonwidth}}%;
+				color: {{linksettings.buttontextcolor}};
+				border-radius: {{linksettings.buttonradius}}px;
+				background-color: {{linksettings.buttonbackgroundcolor}};
+			}
+			[role="button"]:hover {
+				background-color: {{linksettings.buttonbackgroundhovercolor}};
+			}
+			#examplecontainer {
+				background: linear-gradient('{{linksettings.bgradius}}deg, {{linksettings.backgroundcolor1}} 0%, {{linksettings.backgroundcolor2}} 100%');
+				background: #1e5799; /* Old browsers */
+				background: -moz-linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%, {{linksettings.backgroundcolor2}} 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{linksettings.backgroundcolor1}}', endColorstr='{{linksettings.backgroundcolor2}}',GradientType=0 ); /* IE6-9 */
+				min-height: 100%;
+				{% if linksettings.backgroundimage %}
+					background: url({{linksettings.backgroundimage}});
+					background-size: cover;
+				{% endif %}
+			}
+			h1 {
+				margin-bottom: 20px;
+			}
+			#username {
+				color: {{linksettings.namecolor}};
+			}
+		</style>
+		<article>
+			<header class="hcenter">
+				Links Settings
+			</header>
+			<div class="container">
+				<button onclick="window.location.href='/u/{{user.username}}'">Go to my links page</button>
+			</div>
+			<div class="container">
+				<div id="examplecontainer" class="examplecontainer hcenter"
+					style="padding-top: 100px; padding-bottom: 100px;">
+					<h1 id="username" class="hcenter">{{user.username}}{% if user.verified == 'True' %}<span class="verified"><i class="fa-light fa-badge-check"></i></span>{% endif %}</h1>
+					<a id="examplebtn" role="button" href=""><i class="fa-brands fa-twitter"></i> Example Button</a>
+				</div>
+				
+				<form action="{{url_for('editlinks')}}" method="post">
+					<div class="grid">
+						<article>
+							<header>
+								Button Settings
+							</header>
+							<div class="grid">
+								<label for="buttonwidth">
+									<span id="buttonwidthlabel">
+										Button Width {{linksettings.buttonwidth}}%
+									</span>
+									<input type="range" min="10" max="100" value="{{linksettings.buttonwidth}}" id="buttonwidth" name="buttonwidth" oninput="updateBtnWidth(this.value)" onchange="updateBtnWidth(this.value)">
+								</label>
+								<label for="buttonradius">
+									<span id="buttonradiuslabel">
+										Button Radius {{linksettings.buttonradius}}px
+									</span>
+									<input type="range" min="0" max="30" value="{{linksettings.buttonradius}}" id="buttonradius" name="buttonradius" oninput="updateBtnRadius(this.value)" onchange="updateBtnRadius(this.value)">
+								</label>
+							</div>
+							<div class="grid">
+								<label for="buttonbackgroundcolor">Button Background Color
+									<input type="color" id="buttonbackgroundcolor" name="buttonbackgroundcolor" value="{{linksettings.buttonbackgroundcolor}}" oninput="updateBtnColor(this.value)" onchange="updateBtnColor(this.value)">
+								</label>
+								<label for="buttonbacktextcolor">Button Text Color
+									<input type="color" id="buttonbacktextcolor" name="buttonbacktextcolor" value="{{linksettings.buttontextcolor}}" oninput="updateBtnTextColor(this.value)" onchange="updateBtnTextColor(this.value)">
+								</label>
+							</div>
+							<div class="grid">
+								<label for="buttonbordercolor">Button Border Color
+									<input type="color" id="buttonbordercolor" name="buttonbordercolor" value="{{linksettings.buttonbordercolor}}" oninput="updateBtnBorderColor(this.value)" onchange="updateBtnBorderColor(this.value)">
+								</label>
+								<label for="namecolor">Name Color
+									<input type="color" id="namecolor" name="namecolor" value="{{linksettings.namecolor}}" oninput="updateNameColor(this.value)" onchange="updateNameColor(this.value)">
+								</label>
+							</div>
+							<label for="buttonbackgroundhovercolor">Button Background Color Hover
+								<input type="color" id="buttonbackgroundhovercolor" name="buttonbackgroundhovercolor" value="{{linksettings.buttonbackgroundhovercolor}}" oninput="updateBtnBackgroundHover(this.value)" onchange="updateBtnBackgroundHover(this.value)">
+							</label>
+							
+						</article>
+						<article>
+							<header>
+								Page Settings
+							</header>
+							<div class="grid">
+								<label for="backgroundcolor1">Background Color One
+									<input type="color" id="backgroundcolor1" name="backgroundcolor1" value="{{linksettings.backgroundcolor1}}" oninput="updateBackgroundColor()" onchange="updateBackgroundColor()">
+								</label>
+								<label for="backgroundcolor2">Background Color Two
+									<input type="color" id="backgroundcolor2" name="backgroundcolor2" value="{{linksettings.backgroundcolor2}}" oninput="updateBackgroundColor()" onchange="updateBackgroundColor()">
+								</label>
+								<label for="bgradius">
+									<span id="bgradiuslabel">
+										Background Radius {{linksettings.bgradius}}°
+									</span>
+									<input type="range" min="0" max="360" value="{{linksettings.bgradius}}" id="bgradius" name="bgradius" oninput="updateBackgroundColor()" onchange="updateBackgroundColor()">
+								</label>
+							</div>
+							<label for="backgroundimage">
+								Background Image
+								<input type="text" id="backgroundimage" name="backgroundimage" placeholder="Link to image" value="{{linksettings.backgroundimage}}">
+							</label>
+						</article>
+					</div>
+					<div class="grid">
+						<button type="submit">Update Link Settings</button>
+					</div>
+				</div>
+			</form>
+			<div class="container">
+				<form action="{{url_for('editlinks')}}" method="post">
+					<input name="default" hidden>
+					<button type="submit">Reset To Default</button>
+				</form>
+			</div>
+			<script type="text/javascript" src="../static/js/account.js"></script>
+		</article>
+	</section>
+	<script type="text/javascript" src="../static/js/account.js"></script>
+{% endblock %}

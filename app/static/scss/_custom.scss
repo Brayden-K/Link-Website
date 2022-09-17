@@ -57,6 +57,11 @@
 	margin-top: 25%;
 }
 
+.verified {
+	font-size: 20px;
+	background-image: url(../images/cyan.gif);
+}
+
 // H1, H2, H3, H4, H5, H6
 h1, h2, h3, h4, h5, h6 {
 	margin: 0px;
@@ -264,5 +269,46 @@ section#links {
 
 	h1 {
 		text-align: center;
+	}
+	.rain {
+		background-image: url(../images/rain.gif);
+		background-repeat: repeat-x;
+	}
+
+	.hearts {
+		background-image: url(../images/hearts.gif);
+		background-repeat: repeat-x;
+	}
+}
+
+section#dashboard {
+	input {
+		margin: 0px;
+	}
+	th {
+		.delete {
+			// background-color: red;
+			color: red;
+			&:hover {
+				border-color: red;
+			}
+		}
+	}
+	article {
+		width: 100%
+	}
+	.cancel {
+		background-color: red;
+		border-color: red;
+	}
+	select {
+		margin: 0px;
+		width: 200px;
+	}
+}
+
+section#index {
+	h1 {
+		color: var(--primary);
 	}
 }

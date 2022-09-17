@@ -6,6 +6,9 @@
 			#sidebar {
 				display: none;
 			}
+			#topnav {
+				display: none;
+			}
 			#main {
 				width: 100%;
 				left: 0;
@@ -27,7 +30,11 @@
 				background: -webkit-linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* Chrome10-25,Safari5.1-6 */
 				background: linear-gradient({{linksettings.bgradius}}deg,  {{linksettings.backgroundcolor1}} 0%,{{linksettings.backgroundcolor2}} 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{linksettings.backgroundcolor1}}', endColorstr='{{linksettings.backgroundcolor2}}',GradientType=0 ); /* IE6-9 */
-				min-height: 100%;
+				min-height: 100vh;
+				{% if linksettings.backgroundimage %}
+				background: url({{linksettings.backgroundimage}});
+				background-size: cover;
+				{% endif %}
 			}
 
 			#colorschemecontainer {
@@ -39,13 +46,14 @@
 
 			h1 {
 				margin-bottom: 20px;
+				color: {{linksettings.namecolor}};
 			}
 		</style>
 		<section id="links">
-			<h1>{{linksettings.owner}}</h1>
+			<h1 class="username">{{linksettings.owner}} {% if owner.verified == 'True' %}<span class="verified"><i class="fa-light fa-badge-check"></i></span>{% endif %}</h1>
 			{% for link in links %}
 				<div class="buttons">
-					<a role="button" href="{{link.link}}"><i class="fa-brands fa-{{link.icon}}"></i> {{link.label}}</a>
+					<a class="{% if link.highlight %}{{link.highlight}}{% endif %} {% if link.effect %}{{link.effect}}{% endif %}" role="button" href="{{link.link}}"><i class="fa-brands fa-{{link.icon}}"></i> {{link.label}}</a>
 				</div>
 		{% endfor %}
 		</section>

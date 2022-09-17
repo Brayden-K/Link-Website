@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+	<section id="dashboard">
+		<div class="container">
+			<div class="grid">
+				<button class="outline" data-target="add-new-link" onClick="toggleModal(event)">Add new link</button>
+				<button onclick="window.location.href='/u/{{user.username}}'">Go to my links page</button>
+				<button onclick="window.location.href='/editlinks'">Edit Links UI</button>
+			</div>
+		</div>
+		<dialog id="add-new-link">
+		<article>
+			<div class="container hcenter">
+				<form action="{{url_for('dashboard')}}" method="POST">
+					<a href=""
+						aria-label="Close"
+						class="close"
+						data-target="add-new-link"
+						onClick="toggleModal(event)">
+					</a>
+					<h3>Add new link</h3>
+					<!-- Markup example 1: input is inside label -->
+					<label for="label">
+						Label
+						<input type="text" id="label" name="label" placeholder="Label" required>
+					</label>
+					<label for="link">
+						Link
+						<input type="text" id="link" name="link" placeholder="Link" required>
+					</label>
+					<label for="icon">
+						Icon
+						<input type="text" id="icon" name="icon" placeholder="Icon" required>
+					</label>
+					<fieldset>
+						<div class="grid">
+							<label for="publish">
+								<input type="checkbox" id="publish" name="publish" role="switch">
+								Publish
+							</label>
+							<label for="nsfw">
+								<input type="checkbox" id="nsfw" name="nsfw" role="switch">
+								NSFW
+							</label>
+						</div>
+					</fieldset>
+					<footer>
+						<div class="buttoncontainer">
+							<input type="text" name="create" value="True" hidden>
+							<button class="cancel" data-target="add-new-link" onClick="toggleModal(event)">Cancel</button>
+							<button type="submit">Submit</button>
+						</div>
+					</footer>
+				</form>
+			</div>
+		</article>
+		</dialog>
+		{% if links %}
+			<table>
+				<thead>
+					<th scope="col">Label</th>
+					<th scope="col">Link</th>
+					<th scope="col">Icon</th>
+					{% if user.premium == 'True' %}
+						<th scope="col">Highlight</th>
+						<th scope="col">Effect</th>
+					{% endif %}
+					<th scope="col">Publish</th>
+					<th scope="col">NSFW</th>
+					<th scope="col">Options</th>
+					<th scope="col">Delete</th>
+				</thead>
+				<tbody>
+					{% for link in links %}
+						<tr>
+							<form form action="{{url_for('dashboard')}}" method="POST">
+								<th scope="col"><input type="text" name="label" value="{{link.label}}"></th>
+								<th scope="col"><input type="text" name="link" value="{{link.link}}"></th>
+								<th scope="col"><input type="text" name="icon" value="{{link.icon}}"></th>
+								{% if user.premium == 'True' %}
+									<th scope="col">
+										<select id="highlight" name="highlight" required>
+											{% if link.highlight %}
+												<option value="{{link.highlight}}:{{link.highlightname}}" selected>{{link.highlightname}}</option>
+											{% else %}
+												<option value="None" selected>None</option>
+											{% endif %}
+											{% for highlight in highlightoptions %}
+												{% if highlight.name != link.highlightname %}
+													<option value="{{highlight.class}}:{{highlight.name}}">{{highlight.name}}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
+									</th>
+									<th scope="col">
+										<select id="effect" name="effect" required>
+											{% if link.effect %}
+												<option value="{{link.effect}}:{{link.effectname}}" selected>{{link.effectname}}</option>
+											{% else %}
+												<option value="None" selected>None</option>
+											{% endif %}
+											{% for effect in effectoptions %}
+												{% if effect.name != link.effectname %}
+													<option value="{{effect.class}}:{{effect.name}}">{{effect.name}}</option>
+												{% endif %}
+											{% endfor %}
+										</select>
+									</th>
+								{% endif %}
+								<th scope="col"><input type="checkbox" id="publish" name="publish" role="switch" {% if link.publish == 'True' %}checked{% endif %}></th>
+								<th scope="col"><input type="checkbox" id="nsfw" name="nsfw" role="switch" {% if link.nsfw == 'True' %}checked{% endif %}></th>
+								
+								<input type="text" name="update" value="True" hidden>
+								<input type="text" name="id" value="{{link.id}}" hidden>
+								<th scope="col"><button class="submit outline" data-tooltip="Save Changes" data-placement="left" type="submit"><i class="fa-regular fa-pen"></i></button></th>
+							</form>
+							<form form action="{{url_for('dashboard')}}" method="POST">
+								<input type="text" name="delete" value="True" hidden>
+								<input type="text" name="id" value="{{link.id}}" hidden>
+								<th scope="col"><button class="delete outline" data-tooltip="Delete Link" data-placement="left" type="submit"><i class="fa-regular fa-trash"></i></button></th>
+							</form>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</section>
+{% endblock %}

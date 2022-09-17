@@ -2629,6 +2629,11 @@ textarea,
   margin-top: 25%;
 }
 
+.verified {
+  font-size: 20px;
+  background-image: url(../images/cyan.gif);
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0px;
 }
@@ -2817,6 +2822,39 @@ section#links .buttons {
 }
 section#links h1 {
   text-align: center;
+}
+section#links .rain {
+  background-image: url(../images/rain.gif);
+  background-repeat: repeat-x;
+}
+section#links .hearts {
+  background-image: url(../images/hearts.gif);
+  background-repeat: repeat-x;
+}
+
+section#dashboard input {
+  margin: 0px;
+}
+section#dashboard th .delete {
+  color: red;
+}
+section#dashboard th .delete:hover {
+  border-color: red;
+}
+section#dashboard article {
+  width: 100%;
+}
+section#dashboard .cancel {
+  background-color: red;
+  border-color: red;
+}
+section#dashboard select {
+  margin: 0px;
+  width: 200px;
+}
+
+section#index h1 {
+  color: var(--primary);
 }
 
 /*# sourceMappingURL=main.css.map */

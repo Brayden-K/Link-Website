@@ -12,17 +12,20 @@ function updateBtnColor(newVal){
     document.getElementById("examplebtn").style.backgroundColor = newVal;
 }
 
+function updateNameColor(newVal){
+    document.getElementById("username").style.color = newVal;
+}
+
 function updateBtnBackgroundHover(newVal){
-    var css = 'examplebtn:hover { background-color: #00ff00; }';
-    var style = document.createElement('style');
-    
-    if (style.styleSheet) {
-        style.styleSheet.cssText = css;
-    } else {
-        style.appendChild(document.createTextNode(css));
+    const old = document.getElementById("examplebtn").style.backgroundColor
+    document.getElementById("examplebtn").onmouseover = function() 
+    {
+        this.style.backgroundColor = newVal;
     }
-    
-    document.getElementsByTagName('head')[0].appendChild(style);
+    document.getElementById("examplebtn").onmouseleave = function() 
+    {
+        this.style.backgroundColor = old;
+    }
 }
 
 function updateBtnTextColor(newVal){

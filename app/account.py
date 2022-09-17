@@ -15,16 +15,4 @@ def account():
 		else:
 			highlight = False
 		app.db.UpdateAccount(username, highlight)
-
-	if 'backgroundcolor1' in request.form:
-		backgroundcolor1 = request.form['backgroundcolor1']
-		backgroundcolor2 = request.form['backgroundcolor2']
-		bgradius = request.form['bgradius']
-		buttonbackgroundcolor = request.form['buttonbackgroundcolor']
-		buttontextcolor = request.form['buttonbacktextcolor']
-		buttonbordercolor = request.form['buttonbordercolor']
-		buttonradius = request.form['buttonradius']
-		buttonwidth = request.form['buttonwidth']
-		app.db.UpdateLinkSettings(username, backgroundcolor1, backgroundcolor2, bgradius, buttonbackgroundcolor, buttontextcolor, buttonbordercolor, buttonradius, buttonwidth)
-		linksettings = app.db.GetLinkSettings(username)
 	return render_template('account.html', linksettings=linksettings)

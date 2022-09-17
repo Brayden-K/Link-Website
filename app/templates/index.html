@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Index.html</h1>
+<style>
+	#sidebar {
+		display: none;
+	}
+	#topnav {
+		display:  none;
+	}
+</style>
+<script>
+	let main = document.getElementById('main');
+	main.style.width = "100%";
+	main.style.left = "0";
+</script>
+<section id="index">
+	<h1 class="hcenter logo">{{settings.logo}}</h1>
+</section>
 {% endblock %}
