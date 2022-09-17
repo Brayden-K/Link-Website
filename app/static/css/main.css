@@ -2853,8 +2853,37 @@ section#dashboard select {
   width: 200px;
 }
 
+section#index {
+  min-height: 100vh;
+}
 section#index h1 {
-  color: var(--primary);
+  font-size: 100px;
+  margin-top: 50px;
+}
+section#index .logo {
+  margin-top: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+}
+section#index .buttons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+section#index .buttons button {
+  background-color: #3a77dc;
+  text-align: center;
+  height: 80px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+section#index .buttons button:hover {
+  background-color: #dc4bb3;
+  border-color: #dc4bb3;
 }
 
 /*# sourceMappingURL=main.css.map */

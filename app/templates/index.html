@@ -1,20 +1,69 @@
-{% extends "base.html" %}
-{% block title %}Home{% endblock %}
-{% block content %}
-<style>
-	#sidebar {
-		display: none;
-	}
-	#topnav {
-		display:  none;
-	}
-</style>
-<script>
-	let main = document.getElementById('main');
-	main.style.width = "100%";
-	main.style.left = "0";
-</script>
-<section id="index">
-	<h1 class="hcenter logo">{{settings.logo}}</h1>
-</section>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Home - {{settings.logo}}</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- favicon-->
+      <link rel="icon" type="../static/index/image/png" sizes="32x32" href="../static/index/image/favicon-32x32.png">
+      <link rel="stylesheet" href="../static/index/css/bootstrap.css">
+      <link href="../static/index/css/style.css" rel="stylesheet">
+      <link href="../static/index/css/responsive.css" rel="stylesheet">
+      <link href="../static/index/css/animate.css" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800" rel="stylesheet">
+      <link rel="stylesheet" href="../static/index/css/font-awesome.min.css">
+      <link rel="stylesheet" type="text/css" href="../static/index/css/slick.css">
+      <link rel="stylesheet" type="text/css" href="../static/index/css/slick-theme.css">
+   </head>
+   <body>
+      <section class="banner-app">
+         <div class="">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="heading headbetter text-color  wow animated slideInLeft">
+                     {% if session %}
+                     <h3>Welcome back,</h3>
+                     <h3>{{user.username}}</h3>
+                     <p>Linkit is the best way to share all of your
+                        links in one place. Instead of giving out multiple
+                        links to all of your socials and sites, share a single link
+                        with a custom UI.
+                     </p>
+                     <div class="banner-btn ">
+                        <a href="{{url_for('dashboard')}}"  class="btn btn-pink button6">Dashboard</a>
+                     </div>
+                     {% else %}
+                     <h3>The best way to</h3>
+                     <h3>share all of your links</h3>
+                     <p>Linkit is the best way to share all of your
+                        links in one place. Instead of giving out multiple
+                        links to all of your socials and sites, share a single link
+                        with a custom UI.
+                     </p>
+                     <div class="banner-btn ">
+                        <a href="{{url_for('login')}}"  class="btn btn-pink button6">Login</a>
+                        <a href=""  class="btn btn-blue button6">Check features</a>
+                     </div>
+                     {% endif %}
+                  </div>
+               </div>
+               <div class="col-md-6 col-sm-6 no-padd">
+                  <div class=" wow animated zoomIn">
+                     <img src="../static/index/image/web-app.png" class="img-responsive" alt="image">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--jQuery-->
+      <script src="../static/index/js/jquery.js"></script>
+       <!--Bootstrap-->
+      <script src="../static/index/js/bootstrap.js"></script>
+       <!--wow js-->
+      <script src="../static/index/js/wow.js"></script>
+       <!--Slick-->
+      <script src="../static/index/js/slick.js"></script>
+       <!--Custom js-->
+      <script src="../static/index/js/custom.js"></script>
+   </body>
+</html>
