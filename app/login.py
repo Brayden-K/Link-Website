@@ -39,7 +39,7 @@ def login():
 					# Login
 					session['loggedin'] = True
 					session['username'] = username
-					return redirect(url_for('index'))
+					return redirect(url_for('dashboard'))
 				else:
 					# Register
 					created_at = datetime.date.today()
@@ -51,7 +51,7 @@ def login():
 					app.db.Register(username, email, twitchid, profile_image_url, broadcaster_type, twitch_created_at, created_at)
 					session['loggedin'] = True
 					session['username'] = username
-					return redirect(url_for('index'))
+					return redirect(url_for('dashboard'))
 
 @app.route('/logout')
 def logout():
